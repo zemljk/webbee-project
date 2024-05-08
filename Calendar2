@@ -1,7 +1,4 @@
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,7 +6,14 @@ public class PC2 {
     static int hour;
 
     public static void main(String[] args) {
+        LocalDate date = LocalDate.of(2024, 4, 27);
+        LocalTime time = LocalTime.of(17, 55);
 
+        // Проверяем, является ли дата и время нерабочими
+        boolean isNonWorkingDay = isNonWorkingDay(date, time);
+
+        // Выводим результат
+        System.out.println(isNonWorkingDay);
     }
 
     public boolean isWeekends(int year, int month, int day, int hour, int minute){
@@ -28,9 +32,15 @@ public class PC2 {
 
         List<DayOfWeek> weekendDays = Arrays.asList(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
 
-
-        // Возвращаем true, если день недели является выходным
-
+        if (date.equals(LocalDate.of(2024, 12, 28)) && dayOfWeek == DayOfWeek.SATURDAY) {
+            return false;
+        }
+        if (date.equals(LocalDate.of(2024, 11, 2)) && dayOfWeek == DayOfWeek.SATURDAY) {
+            return false;
+        }
+        if (date.equals(LocalDate.of(2024, 4, 27)) && dayOfWeek == DayOfWeek.SATURDAY) {
+            return false;
+        }
         return weekendDays.contains(dayOfWeek);
     }
 
