@@ -1,0 +1,114 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
+
+public class PC2 {
+    static int hour;
+
+    public static void main(String[] args) {
+
+    }
+
+    public boolean isWeekends(int year, int month, int day, int hour, int minute){
+        LocalDate date = LocalDate.of(year, month, day);
+        LocalTime time = LocalTime.of(hour, minute);
+        boolean isNonWorkingDay = isNonWorkingDay(date,time);
+        return isNonWorkingDay;
+    }
+
+
+    public static boolean isWeekend(LocalDate date) {
+        // Получаем день недели
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+
+        // Создаем список выходных дней
+
+        List<DayOfWeek> weekendDays = Arrays.asList(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
+
+
+        // Возвращаем true, если день недели является выходным
+
+        return weekendDays.contains(dayOfWeek);
+    }
+
+
+    public static int isMinusHour(LocalDate date) {
+        // Создаем список праздничных дней
+        List<LocalDate> holidays = Arrays.asList(
+                LocalDate.of(2024, 2, 22),
+                LocalDate.of(2024, 3, 7),
+                LocalDate.of(2024, 5, 8),
+                LocalDate.of(2024, 6, 11),
+                LocalDate.of(2024, 11, 2)
+        );
+        return ++hour;
+    }
+
+    public static boolean isHoliday(LocalDate date) {
+        // Создаем список праздничных дней
+        List<LocalDate> holidays = Arrays.asList(
+                LocalDate.of(2024, 1, 1),
+                LocalDate.of(2024, 1, 2),
+                LocalDate.of(2024, 1, 3),
+                LocalDate.of(2024, 1, 4),
+                LocalDate.of(2024, 1, 5),
+                LocalDate.of(2024, 1, 8),
+
+                LocalDate.of(2024, 2, 23),
+
+                LocalDate.of(2024, 3, 8),
+
+                LocalDate.of(2024, 4, 29),
+                LocalDate.of(2024, 4, 30),
+
+                LocalDate.of(2024, 5, 1), // Праздник труда
+                LocalDate.of(2024, 5, 9), // День Победы
+                LocalDate.of(2024, 5, 10),
+
+                LocalDate.of(2024, 6, 12),
+
+                LocalDate.of(2024, 11, 4),
+
+                LocalDate.of(2024, 12, 30),
+                LocalDate.of(2024, 12, 31)
+        );
+
+        // Возвращаем true, если дата является праздником
+        return holidays.contains(date);
+    }
+
+    public static boolean isWorkingHours(LocalTime time) {
+
+        // Создаем время начала и окончания рабочего дня
+        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime endTime = LocalTime.of(11, 0);
+        LocalTime startTime2 = LocalTime.of(11, 45);
+        LocalTime endTime2 = LocalTime.of(18-hour, 0);
+
+
+        // Возвращаем true, если время находится в пределах рабочего дня
+        return (time.isAfter(startTime) && time.isBefore(endTime)) || (time.isAfter(startTime2) && time.isBefore(endTime2));
+    }
+
+    public static boolean isNonWorkingDay(LocalDate date, LocalTime time) {
+        // Проверяем, является ли дата выходным или праздником
+        boolean isNonWorkingDay = isWeekend(date) || isHoliday(date);
+
+        // Если дата нерабочая, возвращаем true
+        if (isNonWorkingDay) {
+            return true;
+        }
+
+        // Проверяем, является ли время рабочим
+        boolean isWorkingTime = isWorkingHours(time);
+
+        // Возвращаем true, если время нерабочее
+        return !isWorkingTime;
+    }
+
+
+
+}
