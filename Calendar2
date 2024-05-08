@@ -6,7 +6,7 @@ public class PC2 {
     static int hour;
 
     public static void main(String[] args) {
-        LocalDate date = LocalDate.of(2024, 4, 27);
+        LocalDate date = LocalDate.of(2024, 11, 2);
         LocalTime time = LocalTime.of(17, 55);
 
         // Проверяем, является ли дата и время нерабочими
@@ -31,30 +31,34 @@ public class PC2 {
         // Создаем список выходных дней
 
         List<DayOfWeek> weekendDays = Arrays.asList(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
+        if (date.equals(LocalDate.of(2024, 2, 22))) {
+            ++hour;
+            return false;
+        }
+        if (date.equals(LocalDate.of(2024, 3, 7))) {
+            ++hour;
+            return false;
+        }
+        if (date.equals(LocalDate.of(2024, 5, 8))) {
+            ++hour;
+            return false;
+        }
+        if (date.equals(LocalDate.of(2024, 6, 11))) {
+            ++hour;
+            return false;
+        }
 
         if (date.equals(LocalDate.of(2024, 12, 28)) && dayOfWeek == DayOfWeek.SATURDAY) {
             return false;
         }
         if (date.equals(LocalDate.of(2024, 11, 2)) && dayOfWeek == DayOfWeek.SATURDAY) {
+            ++hour;
             return false;
         }
         if (date.equals(LocalDate.of(2024, 4, 27)) && dayOfWeek == DayOfWeek.SATURDAY) {
             return false;
         }
         return weekendDays.contains(dayOfWeek);
-    }
-
-
-    public static int isMinusHour(LocalDate date) {
-        // Создаем список праздничных дней
-        List<LocalDate> holidays = Arrays.asList(
-                LocalDate.of(2024, 2, 22),
-                LocalDate.of(2024, 3, 7),
-                LocalDate.of(2024, 5, 8),
-                LocalDate.of(2024, 6, 11),
-                LocalDate.of(2024, 11, 2)
-        );
-        return ++hour;
     }
 
     public static boolean isHoliday(LocalDate date) {
