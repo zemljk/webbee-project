@@ -101,6 +101,7 @@ public class PC2 {
         LocalTime endTime = LocalTime.of(11, 0);
         LocalTime startTime2 = LocalTime.of(11, 45);
         LocalTime endTime2 = LocalTime.of(18-hour, 0);
+        hour = 0;
 
 
         // Возвращаем true, если время находится в пределах рабочего дня
